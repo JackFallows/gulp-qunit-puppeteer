@@ -1,0 +1,19 @@
+{
+  "name": "gulp-legacytest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulp-legacytest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
+    "map-stream": "0.0.7",
+    "mocha": "^5.2.0",
+    "puppeteer": "^1.8.0"
+  }
+}
