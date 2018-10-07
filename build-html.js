@@ -16,7 +16,9 @@ function buildHtml(dependencies, testsSource) {
     mocha.setup({
       ui: 'bdd',
       reporter: "xunit"
-    })
+    });
+
+    window.assert = chai.assert;
   </script>
   ${dependencies.map(d => `<script src="${d}"></script>`)}
   ${`<script src="${testsSource}"></script>`}
