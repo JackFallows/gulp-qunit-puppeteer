@@ -3,7 +3,6 @@ const path = require("path");
 
 async function run(html) {
     const browser = await puppeteer.launch();
-    console.log(await browser.version());
 
     const page = await browser.newPage();
 
@@ -16,11 +15,8 @@ async function run(html) {
     });
     
     await page.goto("file://" + html);
-    await new Promise((resolve) => {
-        setTimeout(() => {
-            resolve();
-        }, 2500);
-    });
+
+    await page.evaluate("runTests()");
     
     // await page.pdf({path: 'page.pdf', format: 'A4'});
 

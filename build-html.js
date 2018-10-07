@@ -21,8 +21,13 @@ function buildHtml(dependencies, testsSource) {
   ${dependencies.map(d => `<script src="${d}"></script>`)}
   ${`<script src="${testsSource}"></script>`}
   <script>
-    mocha.checkLeaks();
-    mocha.run();
+    function runTests() {
+      return new Promise((resolve) => {
+        mocha.checkLeaks();
+        mocha.run();
+        resolve();
+      });
+    }
   </script>
 </body>
 </html>
