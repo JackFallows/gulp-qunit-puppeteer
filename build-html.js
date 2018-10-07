@@ -9,7 +9,7 @@ function buildHtml(dependencies, testsSource) {
 <body>
   <div id="mocha"></div>
 
-  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
 
   <script>
@@ -24,11 +24,8 @@ function buildHtml(dependencies, testsSource) {
   ${`<script src="${testsSource}"></script>`}
   <script>
     function runTests() {
-      return new Promise((resolve) => {
-        mocha.checkLeaks();
-        mocha.run();
-        resolve();
-      });
+      mocha.checkLeaks();
+      mocha.run();
     }
   </script>
 </body>
