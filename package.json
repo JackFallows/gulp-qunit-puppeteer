@@ -9,11 +9,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "chai": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-util": "^3.0.8",
     "map-stream": "0.0.7",
-    "mocha": "^5.2.0",
     "puppeteer": "^1.8.0"
   }
 }

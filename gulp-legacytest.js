@@ -5,6 +5,7 @@ const path = require("path");
 const buildHtml = require("./build-html");
 const hashCode = require("./hash-code");
 const run = require("./test-run");
+const buildXml = require("./build-xml");
 
 const testPlugin = function (dependencies) {
     return map(async function(file, cb) {
@@ -17,8 +18,9 @@ const testPlugin = function (dependencies) {
             fs.writeFileSync(fileName + ".html", htmlContent);
 
             console.log(path.resolve(fileName + ".html"));
-            const results = await run(path.resolve(fileName + ".html"));
-            fs.writeFileSync(`${fileName}-results.xml`, results);
+            const { overall, results } = await run(path.resolve(fileName + ".html"));
+            const xml = buildXml(results, overall, path.basename(file.path, path.extname(file.path)));
+            fs.writeFileSync(`${fileName}-results.xml`, xml);
             fs.unlinkSync(fileName + ".html");
         }
         catch (e) {

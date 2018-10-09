@@ -4,28 +4,30 @@ function buildHtml(dependencies, testsSource) {
 <head>
   <meta charset="utf-8">
   <title>Mocha Tests</title>
-  <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
 </head>
 <body>
-  <div id="mocha"></div>
-
-  <script src="../node_modules/chai/chai.js"></script>
-  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../bower_components/qunit/qunit/qunit.js"></script> <!-- TODO: resolve relative path -->
 
   <script>
-    mocha.setup({
-      ui: 'bdd',
-      reporter: "xunit"
-    });
+    window.results = [];
 
-    window.assert = chai.assert;
+    QUnit.config.autostart = false;
   </script>
   ${dependencies.map(d => `<script src="${d}"></script>`)}
   ${`<script src="${testsSource}"></script>`}
   <script>
     function runTests() {
-      mocha.checkLeaks();
-      mocha.run();
+      return new Promise(resolve => {
+        QUnit.testDone(function(testResult) {
+            window.results.push(testResult);
+        })
+          
+        QUnit.done(function (overall) {
+          resolve({ overall, results: window.results });
+        });
+          
+        QUnit.start();
+      })
     }
   </script>
 </body>

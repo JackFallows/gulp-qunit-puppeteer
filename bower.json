@@ -1,0 +1,19 @@
+{
+  "name": "gulp-legacytest",
+  "description": "",
+  "main": "gulp-legacytest.js",
+  "authors": [
+    "Jack Fallows"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/JackFallows/gulp-legacytest",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "qunit": "^2.6.2"
+  }
+}

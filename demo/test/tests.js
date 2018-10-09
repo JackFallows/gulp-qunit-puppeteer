@@ -1,20 +1,15 @@
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal([1,2,3].indexOf(4), -1);
-    });
-  });
+QUnit.module("Array");
+
+QUnit.test("#indexOf() should return -1 when the value is not present", function(assert) {
+  assert.equal([1,2,3].indexOf(4), -1);
 });
 
-describe("namespaces", function(){
-  describe("window", function(){
-    it("should exist", function(){
-      assert.ok(window);
-    })
-  })
-  describe("TopLevel", function(){
-    it("should exist",function(){
-      assert.ok(window.TopLevel);
-    })
-  })
-})
+QUnit.module("namespaces");
+
+QUnit.test("window should exist", function(assert) {
+  assert.ok(window);
+});
+
+QUnit.test("TopLevel should exist", function(assert) {
+  assert.ok(window.TopLevel);
+});
