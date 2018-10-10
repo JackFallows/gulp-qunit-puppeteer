@@ -19,9 +19,25 @@ const testPlugin = function (dependencies) {
 
             console.log(path.resolve(fileName + ".html"));
             const { overall, results } = await run(path.resolve(fileName + ".html"));
-            const xml = buildXml(results, overall, path.basename(file.path, path.extname(file.path)));
+
+            const suiteName = path.basename(file.path, path.extname(file.path));
+            const xml = buildXml(results, overall, suiteName);
             fs.writeFileSync(`${fileName}-results.xml`, xml);
             fs.unlinkSync(fileName + ".html");
+
+            console.log(overall);
+            if (overall.failed > 0) {
+                const failedTests = results.filter(r => r.failed > 0);
+                
+                const message = failedTests.map(test => `
+Suite: ${suiteName}
+Module: ${test.module}
+Test: ${test.name}
+Message: ${test.assertions[0].message}
+`).join('\n');
+                
+                throw new Error(message);
+            }
         }
         catch (e) {
             error = new gutil.PluginError("gulp-legacytest", e, { showStack: true });

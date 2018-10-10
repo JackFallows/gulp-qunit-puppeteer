@@ -3,7 +3,6 @@ function buildHtml(dependencies, testsSource) {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mocha Tests</title>
 </head>
 <body>
   <script src="../bower_components/qunit/qunit/qunit.js"></script> <!-- TODO: resolve relative path -->
@@ -20,7 +19,7 @@ function buildHtml(dependencies, testsSource) {
       return new Promise(resolve => {
         QUnit.testDone(function(testResult) {
             window.results.push(testResult);
-        })
+        });
           
         QUnit.done(function (overall) {
           resolve({ overall, results: window.results });
