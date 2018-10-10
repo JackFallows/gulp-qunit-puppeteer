@@ -29,6 +29,6 @@ const testPlugin = function (dependencies) {
 
         cb(error, file);
     });
-}
+};
 
 module.exports = testPlugin;
