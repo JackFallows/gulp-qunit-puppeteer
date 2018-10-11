@@ -24,7 +24,8 @@ gulp.task("test1", () => {
 
 gulp.task("test2", () => {
     return gulp.src("./test/tests3.js")
-        .pipe(test({ "tests3": ["./test-namespaces.js"] }, {
+        .pipe(test({
+            dependencies: { "tests3": ["./test-namespaces.js"] },
             transformFileName(suiteName) {
                 return `${suiteName}Results`
             }

@@ -8,12 +8,23 @@ const hashCode = require("string-hash");
 const run = require("./test-run");
 const buildXml = require("./build-xml");
 
-const testPlugin = function (dependencies, options) {
+const testPlugin = function (options) {
+    let dependencies;
+    let transformFileName;
+    
+    if (Array.isArray(options)) {
+        dependencies = options;
+    } else {
+        ({ dependencies, transformFileName } = options || {});
+    }
+
+    if (dependencies == null) {
+        dependencies = [];
+    }
+    
     return map(async function(file, callback) {
         let error;
         let newFile;
-
-        let { transformFileName } = options || {};
         
         try {
             const suiteName = path.basename(file.path, path.extname(file.path));
