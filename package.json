@@ -9,12 +9,18 @@
   "author": "Jack Fallows",
   "license": "MIT",
   "dependencies": {
-    "gulp": "^3.9.1",
     "gulp-util": "^3.0.8",
     "map-stream": "0.0.7",
     "puppeteer": "^1.8.0",
     "qunit": "^2.7.0",
     "string-hash": "^1.1.3",
+    "vinyl": "^2.2.0",
     "xml-escape": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-fail": "^1.1.1",
+    "gulp-if": "^2.0.2"
   }
 }
