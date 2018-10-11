@@ -3,7 +3,7 @@ const gutil = require("gulp-util");
 const fs = require("fs");
 const path = require("path");
 const buildHtml = require("./build-html");
-const hashCode = require("./hash-code");
+const hashCode = require("string-hash");
 const run = require("./test-run");
 const buildXml = require("./build-xml");
 

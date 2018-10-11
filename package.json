@@ -13,6 +13,7 @@
     "gulp-util": "^3.0.8",
     "map-stream": "0.0.7",
     "puppeteer": "^1.8.0",
+    "string-hash": "^1.1.3",
     "xml-escape": "^1.1.0"
   }
 }
