@@ -13,12 +13,18 @@ const testPlugin = function (dependencies, options) {
         let error;
         let newFile;
 
-        let { transformFileName } = options || {}; 
+        let { transformFileName } = options || {};
         
         try {
-            const htmlContent = buildHtml(dependencies, file.path);
-
             const suiteName = path.basename(file.path, path.extname(file.path));
+            let htmlContent;
+
+            if (Array.isArray(dependencies)) {
+                htmlContent = buildHtml(dependencies, file.path);    
+            } else {
+                htmlContent = buildHtml(dependencies[suiteName], file.path);
+            }
+
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;
             fs.writeFileSync(fileName + ".html", htmlContent);
 
