@@ -1,3 +1,5 @@
+const path = require("path");
+
 function buildHtml(dependencies, testsSource) {
     return `
 <html>
@@ -5,7 +7,7 @@ function buildHtml(dependencies, testsSource) {
   <meta charset="utf-8">
 </head>
 <body>
-  <script src="../bower_components/qunit/qunit/qunit.js"></script> <!-- TODO: resolve relative path -->
+  <script src="${path.resolve("../node_modules/qunit/qunit/qunit.js")}"></script> <!-- TODO: resolve relative path -->
 
   <script>
     window.results = [];
