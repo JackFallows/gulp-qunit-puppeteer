@@ -8,24 +8,30 @@ const hashCode = require("string-hash");
 const run = require("./test-run");
 const buildXml = require("./build-xml");
 
-const testPlugin = function (dependencies) {
+const testPlugin = function (dependencies, options) {
     return map(async function(file, callback) {
         let error;
         let newFile;
 
+        let { transformFileName } = options || {}; 
+        
         try {
             const htmlContent = buildHtml(dependencies, file.path);
 
-            const fileName = `test-${hashCode(htmlContent)}`;
+            const suiteName = path.basename(file.path, path.extname(file.path));
+            const fileName = `${suiteName}-${hashCode(htmlContent)}`;
             fs.writeFileSync(fileName + ".html", htmlContent);
 
             const { overall, results } = await run(path.resolve(fileName + ".html"));
 
-            const suiteName = path.basename(file.path, path.extname(file.path));
             const xml = buildXml(results, overall, suiteName);
             fs.unlinkSync(fileName + ".html");
 
-            let resultsFileName = `${fileName}-results.xml`;
+            if (typeof(transformFileName) !== "function") {
+                transformFileName = () => `${fileName}-results`; 
+            }
+            
+            let resultsFileName = transformFileName(suiteName) + ".xml";
             newFile = new Vinyl({
                 cwd: '/',
                 base: path.dirname(resultsFileName),
