@@ -32,10 +32,10 @@ function prepareOptions(options, suiteName) {
     }
     
     let html = {};
-    if (typeof (htmlBody) === "string") {
-        html[suiteName] = htmlBody;
+    if (typeof (htmlBody) === "string" || htmlBody == null) {
+        html[suiteName] = htmlBody || "";
     } else {
-        html = htmlBody;
+        html = htmlBody || "";
     }
 
     if (typeof (transformFileName) !== "function") {
