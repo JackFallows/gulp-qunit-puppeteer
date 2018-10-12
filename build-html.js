@@ -1,12 +1,14 @@
 const path = require("path");
 
-function buildHtml(dependencies, testsSource) {
+function buildHtml(dependencies, testsSource, htmlBody) {
     return `
 <html>
 <head>
   <meta charset="utf-8">
 </head>
 <body>
+  ${htmlBody || ""}
+
   <script src="${path.resolve("../node_modules/qunit/qunit/qunit.js")}"></script> <!-- TODO: resolve relative path -->
 
   <script>

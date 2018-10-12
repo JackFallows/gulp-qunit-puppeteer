@@ -11,11 +11,13 @@ const buildXml = require("./build-xml");
 const testPlugin = function (options) {
     let dependencies;
     let transformFileName;
+    let htmlBody;
+    let consolePassthrough;
     
     if (Array.isArray(options)) {
         dependencies = options;
     } else {
-        ({ dependencies, transformFileName } = options || {});
+        ({ dependencies, transformFileName, htmlBody, consolePassthrough } = options || {});
     }
 
     if (dependencies == null) {
@@ -31,15 +33,15 @@ const testPlugin = function (options) {
             let htmlContent;
 
             if (Array.isArray(dependencies)) {
-                htmlContent = buildHtml(dependencies, file.path);    
+                htmlContent = buildHtml(dependencies, file.path, htmlBody);    
             } else {
-                htmlContent = buildHtml(dependencies[suiteName], file.path);
+                htmlContent = buildHtml(dependencies[suiteName] || [], file.path, htmlBody);
             }
 
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;
             fs.writeFileSync(fileName + ".html", htmlContent);
 
-            const { overall, results } = await run(path.resolve(fileName + ".html"));
+            const { overall, results } = await run(path.resolve(fileName + ".html"), consolePassthrough);
 
             const xml = buildXml(results, overall, suiteName);
             fs.unlinkSync(fileName + ".html");

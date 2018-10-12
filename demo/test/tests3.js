@@ -1,15 +1,5 @@
-QUnit.module("Array");
+QUnit.module("DOM");
 
-QUnit.test("#indexOf() should return -1 when the value is not present", function(assert) {
-    assert.equal([1,2,3].indexOf(4), -1);
-});
-
-QUnit.module("namespaces");
-
-QUnit.test("window should exist", function(assert) {
-    assert.ok(window);
-});
-
-QUnit.test("TopLevel should exist", function(assert) {
-    assert.ok(window.TopLevel);
+QUnit.test("id #my-elem exists", function(assert) {
+    assert.ok(document.getElementById("my-elem"));
 });
