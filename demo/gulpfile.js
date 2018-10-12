@@ -8,7 +8,8 @@ const test = require("../gulp-legacytest");
 gulp.task("default", () => {
     return gulp.src("./test/*.js")
         .pipe(test({
-            dependencies: { "tests": ["./test-namespaces.js"], "tests2": ["./test-namespaces.js"] },
+            globalDependencies: ["./test-namespaces.js"],
+            dependencies: { "tests3": ["./test-namespaces-2.js"] },
             htmlBody: "<span id='my-elem'></span>"
         }))
         .pipe(concat("TestResults.xml", {

@@ -9,6 +9,7 @@ const run = require("./test-run");
 const buildXml = require("./build-xml");
 
 const testPlugin = function (options) {
+    let globalDependencies;
     let dependencies;
     let transformFileName;
     let htmlBody;
@@ -17,7 +18,7 @@ const testPlugin = function (options) {
     if (Array.isArray(options)) {
         dependencies = options;
     } else {
-        ({ dependencies, transformFileName, htmlBody, consolePassthrough } = options || {});
+        ({ globalDependencies, dependencies, transformFileName, htmlBody, consolePassthrough } = options || {});
     }
 
     if (dependencies == null) {
@@ -32,10 +33,22 @@ const testPlugin = function (options) {
             const suiteName = path.basename(file.path, path.extname(file.path));
             let htmlContent;
 
+            if (!Array.isArray(dependencies) && !dependencies[suiteName]) {
+                dependencies[suiteName] = [];
+            }
+            
+            if (globalDependencies) {
+                if (Array.isArray(dependencies)) {
+                    dependencies.unshift.apply(dependencies, globalDependencies);
+                } else {
+                    dependencies[suiteName].unshift.apply(dependencies[suiteName], globalDependencies);
+                }
+            }
+            
             if (Array.isArray(dependencies)) {
                 htmlContent = buildHtml(dependencies, file.path, htmlBody);    
             } else {
-                htmlContent = buildHtml(dependencies[suiteName] || [], file.path, htmlBody);
+                htmlContent = buildHtml(dependencies[suiteName], file.path, htmlBody);
             }
 
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;
