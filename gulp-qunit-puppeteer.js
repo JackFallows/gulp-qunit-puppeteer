@@ -3,28 +3,13 @@ const gutil = require("gulp-util");
 const fs = require("fs");
 const path = require("path");
 const Vinyl = require("vinyl");
-const buildHtml = require("./build-html");
 const hashCode = require("string-hash");
+const prepareOptions = require("./prepare-options");
+const buildHtml = require("./build-html");
 const run = require("./test-run");
 const buildXml = require("./build-xml");
 
 const testPlugin = function (options) {
-    let globalDependencies;
-    let dependencies;
-    let transformFileName;
-    let htmlBody;
-    let consolePassthrough;
-    
-    if (Array.isArray(options)) {
-        dependencies = options;
-    } else {
-        ({ globalDependencies, dependencies, transformFileName, htmlBody, consolePassthrough } = options || {});
-    }
-
-    if (dependencies == null) {
-        dependencies = [];
-    }
-    
     return map(async function(file, callback) {
         let error;
         let newFile;
@@ -33,30 +18,9 @@ const testPlugin = function (options) {
             const suiteName = path.basename(file.path, path.extname(file.path));
             let htmlContent;
 
-            if (!Array.isArray(dependencies) && !dependencies[suiteName]) {
-                dependencies[suiteName] = [];
-            }
+            const { dependencies, transformFileName, htmlBody, consolePassthrough } = prepareOptions(options, suiteName);
             
-            if (globalDependencies) {
-                if (Array.isArray(dependencies)) {
-                    dependencies.unshift.apply(dependencies, globalDependencies);
-                } else {
-                    dependencies[suiteName].unshift.apply(dependencies[suiteName], globalDependencies);
-                }
-            }
-
-            let html = {};
-            if (typeof (htmlBody) === "string") {
-                html[suiteName] = htmlBody;
-            } else {
-                html = htmlBody;
-            }
-            
-            if (Array.isArray(dependencies)) {
-                htmlContent = buildHtml(dependencies, file.path, html[suiteName]);    
-            } else {
-                htmlContent = buildHtml(dependencies[suiteName], file.path, html[suiteName]);
-            }
+            htmlContent = buildHtml(dependencies[suiteName], file.path, htmlBody[suiteName]);
 
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;
             fs.writeFileSync(fileName + ".html", htmlContent);
@@ -66,10 +30,6 @@ const testPlugin = function (options) {
             const xml = buildXml(results, overall, suiteName);
             fs.unlinkSync(fileName + ".html");
 
-            if (typeof(transformFileName) !== "function") {
-                transformFileName = () => `${fileName}-results`; 
-            }
-            
             let resultsFileName = transformFileName(suiteName) + ".xml";
             newFile = new Vinyl({
                 cwd: '/',
