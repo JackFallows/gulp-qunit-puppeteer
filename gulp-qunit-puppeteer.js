@@ -44,11 +44,18 @@ const testPlugin = function (options) {
                     dependencies[suiteName].unshift.apply(dependencies[suiteName], globalDependencies);
                 }
             }
+
+            let html = {};
+            if (typeof (htmlBody) === "string") {
+                html[suiteName] = htmlBody;
+            } else {
+                html = htmlBody;
+            }
             
             if (Array.isArray(dependencies)) {
-                htmlContent = buildHtml(dependencies, file.path, htmlBody);    
+                htmlContent = buildHtml(dependencies, file.path, html[suiteName]);    
             } else {
-                htmlContent = buildHtml(dependencies[suiteName], file.path, htmlBody);
+                htmlContent = buildHtml(dependencies[suiteName], file.path, html[suiteName]);
             }
 
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;

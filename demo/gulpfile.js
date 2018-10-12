@@ -10,7 +10,9 @@ gulp.task("default", () => {
         .pipe(test({
             globalDependencies: ["./test-namespaces.js"],
             dependencies: { "tests3": ["./test-namespaces-2.js"] },
-            htmlBody: "<span id='my-elem'></span>"
+            htmlBody: {
+                "tests3": "<span id='my-elem'></span>"
+            }
         }))
         .pipe(concat("TestResults.xml", {
             process(source, filePath) {
