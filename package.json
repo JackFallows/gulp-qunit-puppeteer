@@ -1,8 +1,8 @@
 {
-  "name": "gulp-legacytest",
+  "name": "gulp-qunit-puppeteer",
   "version": "1.0.0",
   "description": "",
-  "main": "gulp-legacytest.js",
+  "main": "gulp-qunit-puppeteer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -3,7 +3,7 @@ const concat = require("gulp-concat-util");
 const gulpIf = require("gulp-if");
 const fail = require("gulp-fail");
 const fs = require("fs");
-const test = require("../gulp-legacytest");
+const test = require("../gulp-qunit-puppeteer");
 
 gulp.task("default", () => {
     return gulp.src("./test/*.js")
