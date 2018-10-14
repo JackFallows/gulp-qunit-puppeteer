@@ -32,7 +32,7 @@ const testPlugin = function (options) {
 
             let resultsFileName = transformFileName(suiteName) + ".xml";
             newFile = new Vinyl({
-                cwd: '/',
+                cwd: file.cwd,
                 base: path.dirname(resultsFileName),
                 path: resultsFileName,
                 contents: Buffer.from(xml, 'utf8')

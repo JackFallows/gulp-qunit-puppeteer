@@ -5,7 +5,12 @@ const fail = require("gulp-fail");
 const fs = require("fs");
 const test = require("../gulp-qunit-puppeteer");
 
-gulp.task("default", () => {
+gulp.task("prepare", () => {
+    return gulp.src("../node_modules/qunit/qunit/qunit.js")
+        .pipe(gulp.dest("./node_modules/qunit/qunit"));
+});
+
+gulp.task("default", ["prepare"], () => {
     return gulp.src("./test/*.js")
         .pipe(test({
             globalDependencies: ["./test-namespaces.js"],
