@@ -9,7 +9,7 @@ function buildHtml(dependencies, testsSource, htmlBody) {
 <body>
   ${htmlBody || ""}
 
-  <script src="${path.resolve("../node_modules/qunit/qunit/qunit.js")}"></script> <!-- TODO: resolve relative path -->
+  <script src="${path.join(__dirname, "node_modules/qunit/qunit/qunit.js")}"></script>
 
   <script>
     window.results = [];
