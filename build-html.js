@@ -1,5 +1,3 @@
-const path = require("path");
-
 function buildHtml(dependencies, testsSource, htmlBody) {
     return `
 <html>
@@ -9,7 +7,7 @@ function buildHtml(dependencies, testsSource, htmlBody) {
 <body>
   ${htmlBody || ""}
 
-  <script src="${path.join(__dirname, "node_modules/qunit/qunit/qunit.js")}"></script>
+  <script src="node_modules/qunit/qunit/qunit.js"></script>
 
   <script>
     window.results = [];
