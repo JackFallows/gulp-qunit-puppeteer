@@ -3,9 +3,6 @@ Runs QUnit tests with the specified JS dependencies in a Puppeteer instance (usi
 
 # Install
 
-**Note**: The package has not yet been published to NPM.
-
-
 ```
 npm install --save-dev gulp-qunit-puppeteer
 ```
