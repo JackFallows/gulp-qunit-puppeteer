@@ -53,7 +53,7 @@ Message: ${test.assertions[0].message}
             }
         }
         catch (e) {
-            error = new gutil.PluginError("gulp-legacytest", e, { showStack: true });
+            error = new gutil.PluginError("gulp-qunit-puppeteer", e, { showStack: true });
         }
 
         callback(error, newFile);
