@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 
-async function run(html, consolePassthrough) {
-    const browser = await puppeteer.launch();
+async function run(html, consolePassthrough, debug) {
+    const browser = await puppeteer.launch({ devtools: !!debug });
     const page = await browser.newPage();
     
     if (consolePassthrough) {

@@ -11,7 +11,7 @@ function prepareOptions(options, suiteName) {
         return { dependencies };
     }
 
-    let { globalDependencies, dependencies, transformFileName, htmlBody, consolePassthrough } = options;
+    let { globalDependencies, dependencies, transformFileName, htmlBody, consolePassthrough, debug } = options;
     
     if (dependencies == null) {
         let tempDep = {};
@@ -42,7 +42,7 @@ function prepareOptions(options, suiteName) {
         transformFileName = () => `${suiteName}-results`;
     }
     
-    return { dependencies, transformFileName, htmlBody: html, consolePassthrough };
+    return { dependencies, transformFileName, htmlBody: html, consolePassthrough, debug };
 }
 
 module.exports = prepareOptions;

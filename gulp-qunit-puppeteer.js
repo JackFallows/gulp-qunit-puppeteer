@@ -18,14 +18,14 @@ const testPlugin = function (options) {
             const suiteName = path.basename(file.path, path.extname(file.path));
             let htmlContent;
 
-            const { dependencies, transformFileName, htmlBody, consolePassthrough } = prepareOptions(options, suiteName);
+            const { dependencies, transformFileName, htmlBody, consolePassthrough, debug } = prepareOptions(options, suiteName);
             
             htmlContent = buildHtml(dependencies[suiteName], file.path, htmlBody[suiteName]);
 
             const fileName = `${suiteName}-${hashCode(htmlContent)}`;
             fs.writeFileSync(fileName + ".html", htmlContent);
 
-            const { overall, results } = await run(path.resolve(fileName + ".html"), consolePassthrough);
+            const { overall, results } = await run(path.resolve(fileName + ".html"), consolePassthrough, debug);
 
             const xml = buildXml(results, overall, suiteName);
             fs.unlinkSync(fileName + ".html");

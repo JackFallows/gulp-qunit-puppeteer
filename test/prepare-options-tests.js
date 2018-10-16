@@ -108,4 +108,16 @@ describe("prepareOptions", function () {
             assert.ok(consolePassthrough);
         });
     });
+    
+    describe("debug", function () {
+        it("has a default of false", function () {
+            const { debug } = prepareOptions({});
+            assert.notOk(debug);
+        });
+        
+        it("can be set to true", function () {
+            const { debug } = prepareOptions({ debug: true });
+            assert.ok(debug);
+        });
+    });
 });
