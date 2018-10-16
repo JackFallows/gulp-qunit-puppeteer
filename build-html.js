@@ -18,17 +18,17 @@ function buildHtml(dependencies, testsSource, htmlBody) {
     ${`<script src="${testsSource}"></script>`}
     <script>
         function runTests() {
-          return new Promise(resolve => {
-            QUnit.testDone(function(testResult) {
-                window.results.push(testResult);
-            });
-              
-            QUnit.done(function (overall) {
-              resolve({ overall, results: window.results });
-            });
-              
-            QUnit.start();
-          })
+            return new Promise(resolve => {
+                QUnit.testDone(function(testResult) {
+                    window.results.push(testResult);
+                });
+                  
+                QUnit.done(function (overall) {
+                  resolve({ overall, results: window.results });
+                });
+                  
+                QUnit.start();
+            })
         }
     </script>
 </body>
