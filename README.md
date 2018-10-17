@@ -79,6 +79,8 @@ Decides whether to passthrough console output from the test run to the Node cons
 
 ## debug
 
-**Type**: boolean
+**Type**: boolean _or_ object with `delay` property
 
 Decides whether to launch Puppeteer in non-headless mode, with DevTools open, enabling debugging with the `debugger;` statement. Default: `false`
+
+Passing as an object with a `delay` property set to a number of milliseconds will instigate a delay before Puppeteer loads the page. This is to give the Chromium browser window time to open before starting the tests. If the test code executes before the window is visible, execution may not pause on any breakpoints. 
