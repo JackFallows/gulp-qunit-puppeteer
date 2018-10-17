@@ -1,16 +1,14 @@
 # gulp-qunit-puppeteer
 Runs QUnit tests with the specified JS dependencies in a Puppeteer instance (using headless Chromium) and outputs the results as JUnit XML.
 
+# Requirements
+
+This plugin uses `async`/`await`, so Node 7.6+ is required.
+
 # Install
 
 ```
 npm install --save-dev gulp-qunit-puppeteer
-```
-
-# Require
-
-```
-const test = require("gulp-qunit-puppeteer");
 ```
 
 # Usage
@@ -21,7 +19,8 @@ const concat = require("gulp-concat-util");
 const gulpIf = require("gulp-if");
 const fail = require("gulp-fail");
 const fs = require("fs");
-const test = require("gulp-qunit-puppeteer");
+
+const test = require("gulp-qunit-puppeteer");                     // require the plugin
 
 gulp.task("default", () => {
     return gulp.src("./test/*.js")                                // specify test suites here
