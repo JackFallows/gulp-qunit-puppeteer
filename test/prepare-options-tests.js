@@ -119,5 +119,10 @@ describe("prepareOptions", function () {
             const { debug } = prepareOptions({ debug: true });
             assert.ok(debug);
         });
+        
+        it("can be set to an object with delay property", function () {
+            const { debug } = prepareOptions({ debug: { delay: 10 } });
+            assert.equal(debug.delay, 10);
+        });
     });
 });
