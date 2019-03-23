@@ -1,8 +1,6 @@
 # gulp-qunit-puppeteer
 
-<div class="alert alert-warning">
-    This project is being deprecated by my new "qunit-puppeteer-runner" project, which can be used in Gulp without it specifically being a Gulp plugin.
-</div>
+```This project is being deprecated by my new "qunit-puppeteer-runner" project, which can be used in Gulp without it specifically being a Gulp plugin.```
 
 Runs QUnit tests with the specified JS dependencies in a Puppeteer instance (using headless Chromium) and outputs the results as JUnit XML.
 
